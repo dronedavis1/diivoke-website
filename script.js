@@ -47,19 +47,112 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* ---------- Video production category flip cards ---------- */
-  document.querySelectorAll(".category-card").forEach((card) => {
-    const flip = () => {
-      const flipped = card.classList.toggle("flipped");
-      card.setAttribute("aria-pressed", String(flipped));
+  /* ---------- Video production category cards: zoom + flip ---------- */
+  const categoryOverlay = document.querySelector("[data-category-overlay]");
+
+  function expandCategoryCard(card) {
+    if (card.classList.contains("expanded") || card.classList.contains("animating")) return;
+
+    const rect = card.getBoundingClientRect();
+    const placeholder = document.createElement("div");
+    placeholder.className = "category-card-placeholder";
+    placeholder.style.width = `${rect.width}px`;
+    placeholder.style.height = `${rect.height}px`;
+    card.parentNode.insertBefore(placeholder, card);
+    card._placeholder = placeholder;
+
+    document.body.appendChild(card);
+    card.style.position = "fixed";
+    card.style.top = `${rect.top}px`;
+    card.style.left = `${rect.left}px`;
+    card.style.width = `${rect.width}px`;
+    card.style.height = `${rect.height}px`;
+    card.style.margin = "0";
+
+    card.classList.add("expanded");
+    card.setAttribute("aria-expanded", "true");
+
+    // Force a reflow so the browser registers the starting position
+    // before we enable the transition and animate to the target size.
+    void card.offsetWidth;
+
+    card.classList.add("animating");
+    requestAnimationFrame(() => {
+      const targetWidth = Math.min(window.innerWidth * 0.9, 720);
+      const targetHeight = Math.min(window.innerHeight * 0.85, 640);
+      card.style.top = `${(window.innerHeight - targetHeight) / 2}px`;
+      card.style.left = `${(window.innerWidth - targetWidth) / 2}px`;
+      card.style.width = `${targetWidth}px`;
+      card.style.height = `${targetHeight}px`;
+      card.classList.add("flipped");
+    });
+
+    categoryOverlay?.classList.add("visible");
+    card.querySelector(".category-card-close")?.focus();
+  }
+
+  function collapseCategoryCard(card) {
+    if (!card.classList.contains("expanded") || !card._placeholder) return;
+
+    const rect = card._placeholder.getBoundingClientRect();
+    card.classList.remove("flipped");
+    card.style.top = `${rect.top}px`;
+    card.style.left = `${rect.left}px`;
+    card.style.width = `${rect.width}px`;
+    card.style.height = `${rect.height}px`;
+    card.setAttribute("aria-expanded", "false");
+
+    categoryOverlay?.classList.remove("visible");
+
+    let cleaned = false;
+    const cleanup = () => {
+      if (cleaned) return;
+      cleaned = true;
+      card.removeEventListener("transitionend", onTransitionEnd);
+      clearTimeout(fallbackTimer);
+      card.classList.remove("expanded", "animating");
+      card.style.position = "";
+      card.style.top = "";
+      card.style.left = "";
+      card.style.width = "";
+      card.style.height = "";
+      card.style.margin = "";
+      if (card._placeholder) {
+        card._placeholder.parentNode.insertBefore(card, card._placeholder);
+        card._placeholder.remove();
+        card._placeholder = null;
+      }
+      card.focus();
     };
-    card.addEventListener("click", flip);
+    const onTransitionEnd = (e) => {
+      if (e.target === card && e.propertyName === "width") cleanup();
+    };
+    // Fallback in case transitionend doesn't fire (e.g. a backgrounded tab
+    // throttling the animation) so the card can never get stuck mid-collapse.
+    const fallbackTimer = setTimeout(cleanup, 600);
+    card.addEventListener("transitionend", onTransitionEnd);
+  }
+
+  document.querySelectorAll(".category-card").forEach((card) => {
+    card.addEventListener("click", (e) => {
+      if (e.target.closest(".category-card-close")) return;
+      expandCategoryCard(card);
+    });
     card.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
+      if ((e.key === "Enter" || e.key === " ") && !card.classList.contains("expanded")) {
         e.preventDefault();
-        flip();
+        expandCategoryCard(card);
       }
     });
+    card.querySelector(".category-card-close")?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      collapseCategoryCard(card);
+    });
+  });
+
+  categoryOverlay?.addEventListener("click", () => {
+    const openCard = document.querySelector(".category-card.expanded");
+    if (openCard) collapseCategoryCard(openCard);
   });
 
   /* ---------- Reviews carousel ---------- */
