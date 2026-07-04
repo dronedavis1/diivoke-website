@@ -47,6 +47,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  /* ---------- Video production category flip cards ---------- */
+  document.querySelectorAll(".category-card").forEach((card) => {
+    const flip = () => {
+      const flipped = card.classList.toggle("flipped");
+      card.setAttribute("aria-pressed", String(flipped));
+    };
+    card.addEventListener("click", flip);
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        flip();
+      }
+    });
+  });
+
   /* ---------- Reviews carousel ---------- */
   const reviewData = window.REVIEWS || [];
   const reviewPhoto = document.querySelector("[data-review-photo]");
@@ -91,8 +106,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const subject = encodeURIComponent(`New project inquiry from ${name}`);
       const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
 
-      // TODO: Replace with your real inbox, or swap this for a form service (Formspree, etc.)
-      window.location.href = `mailto:hello@diivoke.com?subject=${subject}&body=${body}`;
+      // TODO: swap this for a form service (Formspree, etc.) if a JS-free fallback isn't needed
+      window.location.href = `mailto:diivokecreative@gmail.com?subject=${subject}&body=${body}`;
     });
   }
 });
