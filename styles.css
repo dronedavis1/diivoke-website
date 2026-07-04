@@ -453,73 +453,6 @@ input, textarea {
   letter-spacing: 0.05em;
 }
 
-/* Client logo strip */
-.client-strip {
-  margin-top: 64px;
-  padding-top: 48px;
-  border-top: 1px solid var(--border);
-  position: relative;
-}
-
-.client-strip::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 30px;
-  background: var(--bg);
-  border-left: 1px solid var(--border);
-  border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  border-radius: 0 0 20px 20px;
-}
-
-.client-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 16px;
-}
-
-@media (max-width: 900px) {
-  .client-grid { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 500px) {
-  .client-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-.client-logo {
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  aspect-ratio: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 12px;
-  text-align: center;
-}
-
-.client-logo img {
-  max-height: 32px;
-  max-width: 80%;
-  object-fit: contain;
-}
-
-.client-logo span {
-  font-size: 10px;
-  color: var(--text-dimmer);
-}
-
-.client-logo strong {
-  display: block;
-  font-size: 11px;
-  color: var(--text-dim);
-  font-weight: 500;
-}
-
 /* ---------- Services: numbered blocks ---------- */
 .service-block {
   padding: 100px 0 40px;
@@ -851,21 +784,10 @@ input, textarea {
 }
 
 /* ---------- FAQs ---------- */
-.faq-layout {
-  display: grid;
-  grid-template-columns: 0.9fr 1.4fr;
-  gap: 48px;
-}
-
-@media (max-width: 860px) {
-  .faq-layout { grid-template-columns: 1fr; }
-}
-
-.faq-side {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 32px;
+.faq-list {
+  max-width: 720px;
+  margin: 40px auto 0;
+  text-align: left;
 }
 
 .faq-note {
@@ -873,14 +795,7 @@ input, textarea {
   border-radius: var(--radius-md);
   padding: 24px;
   max-width: 320px;
-}
-
-.faq-note p {
-  font-size: 15px;
-  color: var(--text-dim);
-  font-style: italic;
-  margin-bottom: 20px;
-  line-height: 1.6;
+  margin: 32px auto 0;
 }
 
 .faq-note .label {
