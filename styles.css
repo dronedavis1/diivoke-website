@@ -377,13 +377,8 @@ input, textarea {
   .intro { grid-template-columns: 1fr; gap: 32px; }
 }
 
-#intro {
-  padding-bottom: 6px;
-}
-
 /* ---------- Process (Pre-Production) ---------- */
 #pre-production {
-  padding-top: 6px;
   padding-bottom: 98px;
 }
 
@@ -1216,9 +1211,8 @@ input, textarea {
 
 /* ---------- Case study page ---------- */
 .case-hero {
-  max-width: 720px;
   padding-top: 40px;
-  padding-bottom: 40px;
+  padding-bottom: 56px;
 }
 
 .case-hero h1 {
@@ -1231,7 +1225,7 @@ input, textarea {
 .case-hero-desc {
   color: var(--text-dim);
   margin-top: 24px;
-  max-width: 420px;
+  max-width: 560px;
   line-height: 1.7;
 }
 
