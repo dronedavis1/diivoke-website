@@ -78,8 +78,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     card.classList.add("animating");
     requestAnimationFrame(() => {
-      const targetWidth = Math.min(window.innerWidth * 0.9, 720);
-      const targetHeight = Math.min(window.innerHeight * 0.85, 640);
+      const cardRatio = rect.width / rect.height;
+      let targetHeight = Math.min(window.innerHeight * 0.85, 640);
+      let targetWidth = targetHeight * cardRatio;
+      const maxWidth = window.innerWidth * 0.9;
+      if (targetWidth > maxWidth) {
+        targetWidth = maxWidth;
+        targetHeight = targetWidth / cardRatio;
+      }
       card.style.top = `${(window.innerHeight - targetHeight) / 2}px`;
       card.style.left = `${(window.innerWidth - targetWidth) / 2}px`;
       card.style.width = `${targetWidth}px`;
