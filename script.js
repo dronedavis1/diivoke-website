@@ -169,6 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (videoTabsContainer && videoTabPlayer) {
     const videoTabs = videoTabsContainer.querySelectorAll(".video-tab");
     const videoSource = videoTabPlayer.querySelector("source");
+    const textGroups = document.querySelectorAll("[data-text-group]");
 
     videoTabs.forEach((tab) => {
       tab.addEventListener("click", () => {
@@ -187,6 +188,10 @@ document.addEventListener("DOMContentLoaded", () => {
         videoTabPlayer.play().catch(() => {});
 
         if (videoTabCaption) videoTabCaption.textContent = tab.dataset.videoCaption;
+
+        if (tab.dataset.textGroup && textGroups.length) {
+          textGroups.forEach((g) => g.classList.toggle("active", g.dataset.textGroup === tab.dataset.textGroup));
+        }
       });
     });
   }

@@ -142,16 +142,16 @@ input, textarea {
   border-radius: 100px;
   font-weight: 600;
   font-size: 15px;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition: transform 0.3s ease, background 0.2s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
 }
 
 .btn-white {
   background: #fff;
   color: #000;
-}
-
-.btn-white:hover {
-  transform: translateY(-1px);
 }
 
 .btn-icon {
@@ -431,6 +431,11 @@ input, textarea {
   flex-direction: column;
   gap: 20px;
   min-height: 220px;
+  transition: transform 0.3s ease;
+}
+
+.process-card:hover {
+  transform: scale(1.05);
 }
 
 .process-icon {
@@ -519,6 +524,11 @@ input, textarea {
 .accordion-item {
   border-top: 1px solid var(--border);
   padding: 28px 0;
+  transition: transform 0.3s ease;
+}
+
+.accordion-item:hover {
+  transform: scale(1.05);
 }
 
 .accordion-item:last-child {
@@ -1011,7 +1021,11 @@ input, textarea {
   border-radius: var(--radius-md);
   padding: 22px 24px;
   margin-bottom: 14px;
-  transition: background 0.25s ease, border-color 0.25s ease;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.3s ease;
+}
+
+.faq-item:hover {
+  transform: scale(1.05);
 }
 
 .faq-item.open {
@@ -1191,11 +1205,12 @@ input, textarea {
   padding: 16px;
   border-radius: var(--radius-sm);
   margin-top: 8px;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.3s ease;
 }
 
 .form-submit:hover {
   opacity: 0.85;
+  transform: scale(1.05);
 }
 
 /* ---------- Footer ---------- */
@@ -1256,6 +1271,30 @@ input, textarea {
   padding-bottom: 56px;
 }
 
+.case-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: 100px;
+  padding: 8px 18px 8px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+  transition: transform 0.3s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.case-back-link:hover {
+  color: var(--text);
+  border-color: var(--text);
+  transform: scale(1.05);
+}
+
+.case-back-link svg {
+  flex-shrink: 0;
+}
+
 .case-hero h1 {
   font-size: clamp(44px, 6.5vw, 80px);
   font-weight: 800;
@@ -1300,6 +1339,14 @@ input, textarea {
   display: flex;
   flex-direction: column;
   gap: 48px;
+}
+
+.case-text-group {
+  display: none;
+}
+
+.case-text-group.active {
+  display: contents;
 }
 
 .case-text-block h2 {
