@@ -2,6 +2,13 @@
 // DIIVOKE CREATIVE — SHARED SCRIPT
 // ===================================
 
+// Formspree AJAX queue shim — queues initForm() calls until the real
+// @formspree/ajax script (loaded via CDN with `defer` on every page)
+// finishes loading and replaces this stub with the real implementation.
+window.formspree = window.formspree || function () {
+  (formspree.q = formspree.q || []).push(arguments);
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   /* ---------- Mobile / full menu toggle ---------- */
   const menuBtn = document.querySelector("[data-menu-open]");
@@ -365,20 +372,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* ---------- Contact form (no backend — mailto fallback) ---------- */
+  /* ---------- Contact form (Formspree AJAX) ---------- */
   const contactForm = document.querySelector("[data-contact-form]");
   if (contactForm) {
-    contactForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const name = contactForm.querySelector("[name=name]").value;
-      const email = contactForm.querySelector("[name=email]").value;
-      const message = contactForm.querySelector("[name=message]").value;
-
-      const subject = encodeURIComponent(`New project inquiry from ${name}`);
-      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-
-      // TODO: swap this for a form service (Formspree, etc.) if a JS-free fallback isn't needed
-      window.location.href = `mailto:diivokecreative@gmail.com?subject=${subject}&body=${body}`;
+    formspree("initForm", {
+      formElement: "[data-contact-form]",
+      formId: "xvzjyqno",
     });
   }
 });

@@ -1222,6 +1222,50 @@ input, textarea {
   transform: scale(1.05);
 }
 
+.form-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ---------- Formspree success / error banners ---------- */
+.form-status {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.form-status[data-fs-active] {
+  display: flex;
+}
+
+.form-status-success {
+  background: rgba(122, 197, 138, 0.12);
+  border: 1px solid rgba(122, 197, 138, 0.35);
+  color: #9be6ac;
+}
+
+.form-status-error {
+  background: rgba(224, 108, 108, 0.12);
+  border: 1px solid rgba(224, 108, 108, 0.35);
+  color: #f0a3a3;
+}
+
+.form-field-error {
+  display: block;
+  color: #f0a3a3;
+  font-size: 12.5px;
+  font-weight: 500;
+  margin-top: 6px;
+  min-height: 0;
+}
+
 /* ---------- Footer ---------- */
 .site-footer {
   border-top: 1px solid var(--border);
