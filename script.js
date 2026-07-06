@@ -161,6 +161,35 @@ document.addEventListener("DOMContentLoaded", () => {
     if (openCard) collapseCategoryCard(openCard);
   });
 
+  /* ---------- Client project video tabs (multi-video case study pages) ---------- */
+  const videoTabsContainer = document.querySelector("[data-video-tabs]");
+  const videoTabPlayer = document.querySelector("[data-video-tab-player]");
+  const videoTabCaption = document.querySelector("[data-video-tab-caption]");
+
+  if (videoTabsContainer && videoTabPlayer) {
+    const videoTabs = videoTabsContainer.querySelectorAll(".video-tab");
+    const videoSource = videoTabPlayer.querySelector("source");
+
+    videoTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        if (tab.classList.contains("active")) return;
+
+        videoTabs.forEach((t) => {
+          t.classList.remove("active");
+          t.setAttribute("aria-selected", "false");
+        });
+        tab.classList.add("active");
+        tab.setAttribute("aria-selected", "true");
+
+        videoSource.src = tab.dataset.videoSrc;
+        videoTabPlayer.setAttribute("poster", tab.dataset.videoPoster);
+        videoTabPlayer.load();
+
+        if (videoTabCaption) videoTabCaption.textContent = tab.dataset.videoCaption;
+      });
+    });
+  }
+
   /* ---------- Reviews carousel ---------- */
   const reviewData = window.REVIEWS || [];
   const reviewPhoto = document.querySelector("[data-review-photo]");
