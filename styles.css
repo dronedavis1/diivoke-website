@@ -739,6 +739,27 @@ input, textarea {
   color: #000;
 }
 
+/* Soft color variants for the Video Production category cards */
+.category-card--real-estate .category-card-front,
+.category-card--real-estate .category-card-back {
+  background: linear-gradient(160deg, #26374a, #16202c);
+}
+
+.category-card--construction .category-card-front,
+.category-card--construction .category-card-back {
+  background: linear-gradient(160deg, #263c2e, #16241b);
+}
+
+.category-card--sports .category-card-front,
+.category-card--sports .category-card-back {
+  background: linear-gradient(160deg, #3d2529, #241618);
+}
+
+.category-card--racing .category-card-front,
+.category-card--racing .category-card-back {
+  background: linear-gradient(160deg, #352748, #1e1729);
+}
+
 /* Modal overlay behind an expanded category card */
 .category-overlay {
   position: fixed;
