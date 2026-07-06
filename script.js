@@ -198,6 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const categoryTabs = videoCategoryTabsContainer.querySelectorAll(".video-tab");
     const subGroups = document.querySelectorAll("[data-video-sub-group]");
     const gridGroups = document.querySelectorAll("[data-video-grid-group]");
+    const photoGroups = document.querySelectorAll("[data-photo-grid-group]");
     const singlePlayerGroup = videoTabPlayer.closest(".video-tab-player-wrap");
     const videoSource = videoTabPlayer.querySelector("source");
 
@@ -230,6 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const categoryKey = tab.dataset.categoryTab;
       const gridGroup = document.querySelector(`[data-video-grid-group="${categoryKey}"]`);
+      const photoGroup = document.querySelector(`[data-photo-grid-group="${categoryKey}"]`);
 
       subGroups.forEach((g) => g.classList.toggle("active", g.dataset.videoSubGroup === categoryKey));
 
@@ -239,12 +241,22 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!isActive) g.querySelectorAll("video").forEach((v) => v.pause());
       });
 
+      photoGroups.forEach((g) => g.classList.toggle("active", g === photoGroup));
+
       if (gridGroup) {
         // Grid category (e.g. Media Day): hide the single shared player, videos autoplay on their own.
         if (singlePlayerGroup) singlePlayerGroup.classList.add("is-hidden");
         if (videoTabCaption) videoTabCaption.classList.add("is-hidden");
         videoTabPlayer.pause();
         gridGroup.querySelectorAll("video").forEach((v) => v.play().catch(() => {}));
+        return;
+      }
+
+      if (photoGroup) {
+        // Photo category (e.g. Summer Grant): hide the single shared player, show the photo grid.
+        if (singlePlayerGroup) singlePlayerGroup.classList.add("is-hidden");
+        if (videoTabCaption) videoTabCaption.classList.add("is-hidden");
+        videoTabPlayer.pause();
         return;
       }
 

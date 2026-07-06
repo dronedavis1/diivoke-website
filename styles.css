@@ -1516,6 +1516,36 @@ input, textarea {
   color: var(--text-dim);
 }
 
+/* ---------- Photo grid (e.g. Real Estate "Summer Grant" tab) ---------- */
+.photo-grid-section {
+  display: none;
+}
+
+.photo-grid-section.active {
+  display: block;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 760px) {
+  .photo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.photo-grid img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  display: block;
+}
+
 /* Work archive grid card variant (2-col) */
 .work-archive-grid {
   display: grid;
