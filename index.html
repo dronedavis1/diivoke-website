@@ -46,11 +46,15 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero">
-  <div class="hero-media">
+  <div class="hero-media video-autoplay-wrap">
     <!-- VIDEO: replace src below with your hero reel, e.g. assets/videos/hero-reel.mp4 -->
-    <video autoplay muted loop playsinline poster="assets/images/hero-poster.jpg">
+    <video muted loop playsinline poster="assets/images/hero-poster.jpg">
       <source src="assets/videos/hero-reel.mp4" type="video/mp4">
     </video>
+    <button type="button" class="video-mute-toggle" data-video-mute-toggle aria-pressed="false" aria-label="Unmute video">
+      <svg class="icon-muted" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5h2.5L7 2v10L3.5 9H1V5z" fill="currentColor"/><path d="M9.5 4.5l4 5M13.5 4.5l-4 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      <svg class="icon-unmuted" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5h2.5L7 2v10L3.5 9H1V5z" fill="currentColor"/><path d="M9.8 4.2a4 4 0 010 5.6M11.6 2.4a6.7 6.7 0 010 9.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+    </button>
   </div>
   <h1 class="hero-title">Diivoke</h1>
   <p class="hero-sub">Creative<br>Agency</p>
@@ -314,7 +318,7 @@
       </div>
       <div class="project-footer">
         <div>
-          <h3>Gatorball Baseball Academy Storybrand</h3>
+          <h3>Gatorball Baseball Academy</h3>
           <p>A storybrand video for Gatorball Baseball Academy in Gainesville, FL built to connect with families and recruit the next generation of athletes.</p>
         </div>
         <span class="project-arrow">

@@ -184,6 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
         videoSource.src = tab.dataset.videoSrc;
         videoTabPlayer.setAttribute("poster", tab.dataset.videoPoster);
         videoTabPlayer.load();
+        videoTabPlayer.play().catch(() => {});
 
         if (videoTabCaption) videoTabCaption.textContent = tab.dataset.videoCaption;
       });
@@ -196,12 +197,15 @@ document.addEventListener("DOMContentLoaded", () => {
   if (videoCategoryTabsContainer && videoTabPlayer) {
     const categoryTabs = videoCategoryTabsContainer.querySelectorAll(".video-tab");
     const subGroups = document.querySelectorAll("[data-video-sub-group]");
+    const gridGroups = document.querySelectorAll("[data-video-grid-group]");
+    const singlePlayerGroup = videoTabPlayer.closest(".video-tab-player-wrap");
     const videoSource = videoTabPlayer.querySelector("source");
 
     const loadVideo = (src, poster, caption) => {
       videoSource.src = src;
       videoTabPlayer.setAttribute("poster", poster);
       videoTabPlayer.load();
+      videoTabPlayer.play().catch(() => {});
       if (videoTabCaption) videoTabCaption.textContent = caption;
     };
 
@@ -225,7 +229,27 @@ document.addEventListener("DOMContentLoaded", () => {
       tab.setAttribute("aria-selected", "true");
 
       const categoryKey = tab.dataset.categoryTab;
+      const gridGroup = document.querySelector(`[data-video-grid-group="${categoryKey}"]`);
+
       subGroups.forEach((g) => g.classList.toggle("active", g.dataset.videoSubGroup === categoryKey));
+
+      gridGroups.forEach((g) => {
+        const isActive = g === gridGroup;
+        g.classList.toggle("active", isActive);
+        if (!isActive) g.querySelectorAll("video").forEach((v) => v.pause());
+      });
+
+      if (gridGroup) {
+        // Grid category (e.g. Media Day): hide the single shared player, videos autoplay on their own.
+        if (singlePlayerGroup) singlePlayerGroup.classList.add("is-hidden");
+        if (videoTabCaption) videoTabCaption.classList.add("is-hidden");
+        videoTabPlayer.pause();
+        gridGroup.querySelectorAll("video").forEach((v) => v.play().catch(() => {}));
+        return;
+      }
+
+      if (singlePlayerGroup) singlePlayerGroup.classList.remove("is-hidden");
+      if (videoTabCaption) videoTabCaption.classList.remove("is-hidden");
 
       if (tab.dataset.videoSrc) {
         // Single-video category: the video data lives directly on the category tab.
@@ -252,6 +276,43 @@ document.addEventListener("DOMContentLoaded", () => {
           activateSubTab(subTab);
         });
       });
+    });
+  }
+
+  /* ---------- Autoplay-on-view videos with click-to-unmute ---------- */
+  const autoplayWraps = document.querySelectorAll(".video-autoplay-wrap");
+
+  if (autoplayWraps.length && "IntersectionObserver" in window) {
+    const autoplayObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target.querySelector("video");
+          if (!video) return;
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    autoplayWraps.forEach((wrap) => {
+      const video = wrap.querySelector("video");
+      if (!video) return;
+
+      autoplayObserver.observe(wrap);
+
+      const muteBtn = wrap.querySelector("[data-video-mute-toggle]");
+      if (muteBtn) {
+        muteBtn.addEventListener("click", () => {
+          video.muted = !video.muted;
+          muteBtn.classList.toggle("is-unmuted", !video.muted);
+          muteBtn.setAttribute("aria-pressed", String(!video.muted));
+          muteBtn.setAttribute("aria-label", video.muted ? "Unmute video" : "Mute video");
+        });
+      }
     });
   }
 
