@@ -787,6 +787,10 @@ input, textarea {
 }
 
 /* ---------- Portfolio ---------- */
+#portfolio {
+  padding-top: 88px;
+}
+
 .portfolio-head {
   text-align: center;
   margin-bottom: 56px;
