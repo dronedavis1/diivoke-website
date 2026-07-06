@@ -190,6 +190,71 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* ---------- Client project video category tabs (nested: category > individual video) ---------- */
+  const videoCategoryTabsContainer = document.querySelector("[data-video-category-tabs]");
+
+  if (videoCategoryTabsContainer && videoTabPlayer) {
+    const categoryTabs = videoCategoryTabsContainer.querySelectorAll(".video-tab");
+    const subGroups = document.querySelectorAll("[data-video-sub-group]");
+    const videoSource = videoTabPlayer.querySelector("source");
+
+    const loadVideo = (src, poster, caption) => {
+      videoSource.src = src;
+      videoTabPlayer.setAttribute("poster", poster);
+      videoTabPlayer.load();
+      if (videoTabCaption) videoTabCaption.textContent = caption;
+    };
+
+    const activateSubTab = (subTab) => {
+      const group = subTab.closest("[data-video-sub-group]");
+      group.querySelectorAll(".video-sub-tab").forEach((t) => {
+        t.classList.remove("active");
+        t.setAttribute("aria-selected", "false");
+      });
+      subTab.classList.add("active");
+      subTab.setAttribute("aria-selected", "true");
+      loadVideo(subTab.dataset.videoSrc, subTab.dataset.videoPoster, subTab.dataset.videoCaption);
+    };
+
+    const activateCategory = (tab) => {
+      categoryTabs.forEach((t) => {
+        t.classList.remove("active");
+        t.setAttribute("aria-selected", "false");
+      });
+      tab.classList.add("active");
+      tab.setAttribute("aria-selected", "true");
+
+      const categoryKey = tab.dataset.categoryTab;
+      subGroups.forEach((g) => g.classList.toggle("active", g.dataset.videoSubGroup === categoryKey));
+
+      if (tab.dataset.videoSrc) {
+        // Single-video category: the video data lives directly on the category tab.
+        loadVideo(tab.dataset.videoSrc, tab.dataset.videoPoster, tab.dataset.videoCaption);
+      } else {
+        // Multi-video category: reveal its sub-tabs and load the first one by default.
+        const group = document.querySelector(`[data-video-sub-group="${categoryKey}"]`);
+        const firstSubTab = group ? group.querySelector(".video-sub-tab") : null;
+        if (firstSubTab) activateSubTab(firstSubTab);
+      }
+    };
+
+    categoryTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        if (tab.classList.contains("active")) return;
+        activateCategory(tab);
+      });
+    });
+
+    subGroups.forEach((group) => {
+      group.querySelectorAll(".video-sub-tab").forEach((subTab) => {
+        subTab.addEventListener("click", () => {
+          if (subTab.classList.contains("active")) return;
+          activateSubTab(subTab);
+        });
+      });
+    });
+  }
+
   /* ---------- Reviews carousel ---------- */
   const reviewData = window.REVIEWS || [];
   const reviewPhoto = document.querySelector("[data-review-photo]");

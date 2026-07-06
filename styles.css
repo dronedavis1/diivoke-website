@@ -1356,6 +1356,47 @@ input, textarea {
   border-color: #fff;
 }
 
+/* ---------- Nested sub-tabs (category > individual video) ---------- */
+.video-sub-tabs {
+  display: none;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: -14px 0 28px;
+}
+
+.video-sub-tabs.active {
+  display: flex;
+}
+
+.video-sub-tab {
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-dimmer);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 7px 16px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.video-sub-tab:hover {
+  border-color: var(--text-dim);
+  color: var(--text-dim);
+}
+
+.video-sub-tab:focus-visible {
+  outline-offset: 3px;
+}
+
+.video-sub-tab.active {
+  background: var(--bg-card-hover);
+  color: #fff;
+  border-color: var(--border-strong);
+}
+
 .video-tab-player-wrap {
   border-radius: var(--radius-lg);
   overflow: hidden;
