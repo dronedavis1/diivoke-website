@@ -349,6 +349,10 @@ input, textarea {
   white-space: nowrap;
 }
 
+.hero-cta {
+  margin-top: 32px;
+}
+
 /* ---------- Intro / about ---------- */
 .intro {
   display: grid;
