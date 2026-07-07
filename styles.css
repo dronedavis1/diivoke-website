@@ -349,8 +349,10 @@ input, textarea {
   white-space: nowrap;
 }
 
-.hero-cta {
-  margin-top: 32px;
+.hero-cta-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 40px var(--gutter);
 }
 
 /* ---------- Intro / about ---------- */
@@ -710,15 +712,6 @@ input, textarea {
   text-align: center;
 }
 
-.category-card-front img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.55;
-}
-
 .category-card-label {
   position: relative;
   z-index: 1;
@@ -917,7 +910,8 @@ input, textarea {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid var(--border-strong);
+  background: #c2410c;
+  color: #fff;
   display: grid;
   place-items: center;
   flex-shrink: 0;
@@ -925,8 +919,7 @@ input, textarea {
 }
 
 .project-card:hover .project-arrow {
-  background: #fff;
-  color: #000;
+  background: #a8380a;
   transform: rotate(45deg);
 }
 
