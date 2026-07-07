@@ -154,6 +154,11 @@ input, textarea {
   color: #000;
 }
 
+.btn-contact {
+  background: #c2410c;
+  color: #fff;
+}
+
 .btn-icon {
   display: grid;
   place-items: center;
@@ -683,6 +688,8 @@ input, textarea {
   inset: 0;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
   overflow: hidden;
@@ -706,7 +713,6 @@ input, textarea {
   height: 100%;
   object-fit: cover;
   opacity: 0.55;
-  z-index: -1;
 }
 
 .category-card-label {
