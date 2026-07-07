@@ -35,6 +35,7 @@
   <nav class="menu-links">
     <a href="index.html" class="active">Home</a>
     <a href="work.html">Work</a>
+    <a href="reviews.html">Reviews</a>
     <a href="index.html#services">Services</a>
     <a href="index.html#faqs">FAQs</a>
     <a href="index.html#contact">Contact</a>
@@ -52,13 +53,9 @@
     <video muted loop playsinline poster="assets/images/hero-poster.jpg">
       <source src="assets/videos/hero-reel.mp4" type="video/mp4">
     </video>
-    <button type="button" class="video-mute-toggle" data-video-mute-toggle aria-pressed="false" aria-label="Unmute video">
-      <svg class="icon-muted" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5h2.5L7 2v10L3.5 9H1V5z" fill="currentColor"/><path d="M9.5 4.5l4 5M13.5 4.5l-4 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-      <svg class="icon-unmuted" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 5h2.5L7 2v10L3.5 9H1V5z" fill="currentColor"/><path d="M9.8 4.2a4 4 0 010 5.6M11.6 2.4a6.7 6.7 0 010 9.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-    </button>
   </div>
   <h1 class="hero-title">Diivoke</h1>
-  <p class="hero-sub">Creative<br>Agency</p>
+  <p class="hero-sub">Creative Agency</p>
 </section>
 
 <!-- ============ INTRO ============ -->
@@ -357,41 +354,6 @@
   </div>
 </section>
 
-<!-- ============ CTA ============ -->
-<section class="section container work-cta">
-  <p class="work-cta-text">Like what you see? Let's create something for you.</p>
-  <a href="#contact" class="btn btn-white">
-    Book Now
-    <span class="btn-icon">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </span>
-  </a>
-</section>
-
-<!-- ============ REVIEWS ============ -->
-<section class="section container" id="reviews">
-  <div class="reviews-grid">
-    <div class="review-photo">
-      <img data-review-photo src="assets/images/testimonial-stephen-barton.jpg" alt="Client photo">
-    </div>
-    <div>
-      <span class="eyebrow">Testimonial</span>
-      <h2 class="h-xl">Reviews</h2>
-      <p class="review-quote" data-review-quote>&ldquo;Working with Diivoke Creative Agency over the past year and a half has been an outstanding experience for Gatorball. From our monthly content and tournament coverage to the StoryBrand video, aerial property shoots, and media days, their team has consistently delivered high-quality, professional work that truly captures who we are as an organization. What stands out most is their ability to understand our vision and bring it to life in a way that connects with our players, families, and community. The content they've created has elevated our brand, improved our visibility, and helped us tell our story in a much more impactful way. Diivoke is reliable, creative, and easy to work with—I'd highly recommend them to any organization looking to take their marketing and media presence to the next level.&rdquo;</p>
-      <p class="review-name" data-review-name>Stephen Barton</p>
-      <p class="review-role" data-review-role>Gatorball Baseball Academy</p>
-      <div class="review-nav">
-        <button data-review-prev aria-label="Previous review">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 3L5 7l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button data-review-next aria-label="Next review">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ============ FAQS ============ -->
 <section class="section container" id="faqs">
   <div class="faq-layout">
@@ -569,22 +531,24 @@
     <div class="contact-info">
       <span class="eyebrow">Contact Us</span>
       <h2 class="contact-title">Hire us!!</h2>
-      <div class="contact-call">
-        <span class="contact-call-icon">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 3h3l1.5 4L7 8.5a9 9 0 004.5 4.5L13 11.5l4 1.5v3a1.5 1.5 0 01-1.6 1.5A13 13 0 013 4.6 1.5 1.5 0 014.5 3H4z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
-        </span>
-        <div>
-          <div class="label">Call Us</div>
-          <div class="number">(904) 874-5707</div>
-        </div>
-      </div>
-      <div class="contact-start-btn">
-        <a href="#contact" class="btn btn-white">
-          Book Now
-          <span class="btn-icon">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="contact-call-row">
+        <div class="contact-call">
+          <span class="contact-call-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 3h3l1.5 4L7 8.5a9 9 0 004.5 4.5L13 11.5l4 1.5v3a1.5 1.5 0 01-1.6 1.5A13 13 0 013 4.6 1.5 1.5 0 014.5 3H4z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
           </span>
-        </a>
+          <div>
+            <div class="label">Call Us</div>
+            <div class="number">(904) 874-5707</div>
+          </div>
+        </div>
+        <div class="contact-start-btn">
+          <a href="#contact" class="btn btn-white">
+            Book Now
+            <span class="btn-icon">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+        </div>
       </div>
     </div>
 
@@ -618,17 +582,6 @@
   <span>Florida, USA</span>
 </footer>
 
-<script>
-  window.REVIEWS = [
-    {
-      photo: "assets/images/testimonial-stephen-barton.jpg",
-      quote: "Working with Diivoke Creative Agency over the past year and a half has been an outstanding experience for Gatorball. From our monthly content and tournament coverage to the StoryBrand video, aerial property shoots, and media days, their team has consistently delivered high-quality, professional work that truly captures who we are as an organization. What stands out most is their ability to understand our vision and bring it to life in a way that connects with our players, families, and community. The content they've created has elevated our brand, improved our visibility, and helped us tell our story in a much more impactful way. Diivoke is reliable, creative, and easy to work with—I'd highly recommend them to any organization looking to take their marketing and media presence to the next level.",
-      name: "Stephen Barton",
-      role: "Gatorball Baseball Academy"
-    }
-    // Add more testimonials here as objects: { photo, quote, name, role }
-  ];
-</script>
 <script src="script.js"></script>
 </body>
 </html>

@@ -340,38 +340,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* ---------- Reviews carousel ---------- */
-  const reviewData = window.REVIEWS || [];
-  const reviewPhoto = document.querySelector("[data-review-photo]");
-  const reviewQuote = document.querySelector("[data-review-quote]");
-  const reviewName = document.querySelector("[data-review-name]");
-  const reviewRole = document.querySelector("[data-review-role]");
-  const prevBtn = document.querySelector("[data-review-prev]");
-  const nextBtn = document.querySelector("[data-review-next]");
-  let reviewIndex = 0;
-
-  function renderReview() {
-    if (!reviewData.length || !reviewQuote) return;
-    const r = reviewData[reviewIndex];
-    reviewPhoto.src = r.photo;
-    reviewPhoto.alt = r.name;
-    reviewQuote.textContent = `"${r.quote}"`;
-    reviewName.textContent = r.name;
-    reviewRole.textContent = r.role;
-  }
-
-  if (reviewData.length) {
-    renderReview();
-    nextBtn?.addEventListener("click", () => {
-      reviewIndex = (reviewIndex + 1) % reviewData.length;
-      renderReview();
-    });
-    prevBtn?.addEventListener("click", () => {
-      reviewIndex = (reviewIndex - 1 + reviewData.length) % reviewData.length;
-      renderReview();
-    });
-  }
-
   /* ---------- Contact form (Formspree AJAX) ---------- */
   const contactForm = document.querySelector("[data-contact-form]");
   if (contactForm) {
