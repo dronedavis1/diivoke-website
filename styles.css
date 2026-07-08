@@ -1194,37 +1194,6 @@ input, textarea {
 }
 
 /* ---------- Multi-step form ---------- */
-.form-progress {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 28px;
-}
-
-.form-progress-label {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-dim);
-  white-space: nowrap;
-}
-
-.form-progress-track {
-  flex: 1;
-  height: 4px;
-  background: var(--border);
-  border-radius: 100px;
-  overflow: hidden;
-}
-
-.form-progress-fill {
-  display: block;
-  height: 100%;
-  width: 25%;
-  background: #c2410c;
-  border-radius: 100px;
-  transition: width 0.3s ease;
-}
-
 .form-step {
   display: none;
 }

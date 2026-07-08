@@ -356,8 +356,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const nextBtn = contactForm.querySelector("[data-form-next]");
     const submitBtn = contactForm.querySelector("[data-fs-submit-btn]");
     const nav = contactForm.querySelector(".form-nav");
-    const progressLabel = contactForm.querySelector("[data-form-progress-label]");
-    const progressFill = contactForm.querySelector("[data-form-progress-fill]");
     const totalSteps = steps.length;
     let currentStep = 1;
 
@@ -376,9 +374,6 @@ document.addEventListener("DOMContentLoaded", () => {
       steps.forEach((step) => {
         step.classList.toggle("is-active", Number(step.dataset.formStep) === n);
       });
-
-      if (progressLabel) progressLabel.textContent = `Step ${n} of ${totalSteps}`;
-      if (progressFill) progressFill.style.width = `${(n / totalSteps) * 100}%`;
 
       const isFirst = n === 1;
       const isLast = n === totalSteps;
