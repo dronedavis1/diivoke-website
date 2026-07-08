@@ -348,4 +348,92 @@ document.addEventListener("DOMContentLoaded", () => {
       formId: "xvzjyqno",
     });
   }
+
+  /* ---------- Multi-step contact form ---------- */
+  if (contactForm) {
+    const steps = Array.from(contactForm.querySelectorAll("[data-form-step]"));
+    const backBtn = contactForm.querySelector("[data-form-back]");
+    const nextBtn = contactForm.querySelector("[data-form-next]");
+    const submitBtn = contactForm.querySelector("[data-fs-submit-btn]");
+    const nav = contactForm.querySelector(".form-nav");
+    const progressLabel = contactForm.querySelector("[data-form-progress-label]");
+    const progressFill = contactForm.querySelector("[data-form-progress-fill]");
+    const totalSteps = steps.length;
+    let currentStep = 1;
+
+    const isStepValid = (step) => {
+      const checkboxes = step.querySelectorAll('input[type="checkbox"]');
+      if (checkboxes.length) return Array.from(checkboxes).some((cb) => cb.checked);
+      const field = step.querySelector("input, textarea");
+      return !!field && field.value.trim().length > 0;
+    };
+
+    const updateNextState = () => {
+      nextBtn.disabled = !isStepValid(steps[currentStep - 1]);
+    };
+
+    const showStep = (n) => {
+      steps.forEach((step) => {
+        step.classList.toggle("is-active", Number(step.dataset.formStep) === n);
+      });
+
+      if (progressLabel) progressLabel.textContent = `Step ${n} of ${totalSteps}`;
+      if (progressFill) progressFill.style.width = `${(n / totalSteps) * 100}%`;
+
+      const isFirst = n === 1;
+      const isLast = n === totalSteps;
+
+      backBtn.classList.toggle("is-hidden", isFirst);
+      nav.classList.toggle("is-first", isFirst);
+      nextBtn.classList.toggle("is-hidden", isLast);
+      submitBtn.classList.toggle("is-hidden", !isLast);
+
+      updateNextState();
+
+      steps[n - 1].querySelector("input, textarea")?.focus({ preventScroll: true });
+    };
+
+    contactForm.querySelectorAll("[data-step-input]").forEach((input) => {
+      input.addEventListener("input", updateNextState);
+      input.addEventListener("keydown", (e) => {
+        if (e.key !== "Enter" || currentStep === totalSteps) return;
+        e.preventDefault();
+        if (!nextBtn.disabled) {
+          currentStep += 1;
+          showStep(currentStep);
+        }
+      });
+    });
+
+    contactForm.querySelectorAll('[data-form-step] input[type="checkbox"]').forEach((cb) => {
+      cb.addEventListener("change", () => {
+        cb.closest(".form-checkbox")?.classList.toggle("is-checked", cb.checked);
+        updateNextState();
+      });
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (nextBtn.disabled || currentStep >= totalSteps) return;
+      currentStep += 1;
+      showStep(currentStep);
+    });
+
+    backBtn.addEventListener("click", () => {
+      if (currentStep <= 1) return;
+      currentStep -= 1;
+      showStep(currentStep);
+    });
+
+    // Formspree resets the form on a successful submission; sync our step
+    // state back to the start once that native reset has actually run.
+    contactForm.addEventListener("reset", () => {
+      setTimeout(() => {
+        contactForm.querySelectorAll(".form-checkbox.is-checked").forEach((el) => el.classList.remove("is-checked"));
+        currentStep = 1;
+        showStep(currentStep);
+      }, 0);
+    });
+
+    showStep(currentStep);
+  }
 });

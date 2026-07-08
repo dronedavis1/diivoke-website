@@ -189,27 +189,71 @@
       </div>
     </div>
 
-    <form class="contact-form" data-contact-form>
+    <form class="contact-form" data-contact-form novalidate>
       <div class="form-status form-status-success" data-fs-success>Thanks! Your message has been sent — we'll get back to you soon.</div>
       <div class="form-status form-status-error" data-fs-error>Something went wrong — please try again or call us directly.</div>
-      <div class="form-row">
+
+      <div class="form-progress">
+        <span class="form-progress-label" data-form-progress-label>Step 1 of 4</span>
+        <div class="form-progress-track">
+          <span class="form-progress-fill" data-form-progress-fill></span>
+        </div>
+      </div>
+
+      <div class="form-step is-active" data-form-step="1">
         <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" placeholder="Marcus Kane" data-fs-field required>
+          <label for="name">What's your name?</label>
+          <input type="text" id="name" name="name" placeholder="Marcus Kane" data-fs-field data-step-input required>
           <span class="form-field-error" data-fs-error="name"></span>
         </div>
+      </div>
+
+      <div class="form-step" data-form-step="2">
         <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="marcus@example.com" data-fs-field required>
-          <span class="form-field-error" data-fs-error="email"></span>
+          <label for="email_or_phone">Best way to reach you? (email or phone)</label>
+          <input type="text" id="email_or_phone" name="email_or_phone" placeholder="marcus@example.com or (904) 555-0123" data-fs-field data-step-input required>
+          <span class="form-field-error" data-fs-error="email_or_phone"></span>
         </div>
       </div>
-      <div class="form-group">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" placeholder="Write your request" data-fs-field required></textarea>
-        <span class="form-field-error" data-fs-error="message"></span>
+
+      <div class="form-step" data-form-step="3">
+        <div class="form-group">
+          <span class="form-step-label">What service do you need?</span>
+          <div class="form-checkbox-group">
+            <label class="form-checkbox">
+              <input type="checkbox" name="service" value="Website Creation" data-fs-field>
+              <span>Website Creation</span>
+            </label>
+            <label class="form-checkbox">
+              <input type="checkbox" name="service" value="Monthly Website Management" data-fs-field>
+              <span>Monthly Website Management</span>
+            </label>
+            <label class="form-checkbox">
+              <input type="checkbox" name="service" value="Monthly Social Media Retainer" data-fs-field>
+              <span>Monthly Social Media Retainer</span>
+            </label>
+            <label class="form-checkbox">
+              <input type="checkbox" name="service" value="Video Production Services" data-fs-field>
+              <span>Video Production Services</span>
+            </label>
+          </div>
+          <span class="form-field-error" data-fs-error="service"></span>
+        </div>
       </div>
-      <button type="submit" class="form-submit" data-fs-submit-btn>Submit</button>
+
+      <div class="form-step" data-form-step="4">
+        <div class="form-group">
+          <label for="location">What city and state are you in?</label>
+          <input type="text" id="location" name="location" placeholder="Gainesville, FL" data-fs-field data-step-input required>
+          <span class="form-field-error" data-fs-error="location"></span>
+        </div>
+      </div>
+
+      <div class="form-nav is-first">
+        <button type="button" class="form-back is-hidden" data-form-back>Back</button>
+        <button type="button" class="form-next" data-form-next disabled>Next</button>
+        <button type="submit" class="form-submit is-hidden" data-fs-submit-btn>Submit</button>
+      </div>
     </form>
   </div>
 </section>

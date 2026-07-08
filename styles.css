@@ -1174,12 +1174,11 @@ input, textarea {
 
 .form-submit {
   width: 100%;
-  background: #fff;
-  color: #000;
+  background: #c2410c;
+  color: #fff;
   font-weight: 700;
   padding: 16px;
   border-radius: var(--radius-sm);
-  margin-top: 8px;
   transition: opacity 0.2s ease, transform 0.3s ease;
 }
 
@@ -1192,6 +1191,133 @@ input, textarea {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+}
+
+/* ---------- Multi-step form ---------- */
+.form-progress {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.form-progress-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.form-progress-track {
+  flex: 1;
+  height: 4px;
+  background: var(--border);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.form-progress-fill {
+  display: block;
+  height: 100%;
+  width: 25%;
+  background: #c2410c;
+  border-radius: 100px;
+  transition: width 0.3s ease;
+}
+
+.form-step {
+  display: none;
+}
+
+.form-step.is-active {
+  display: block;
+}
+
+.form-step-label {
+  display: block;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.form-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #1c1c1c;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: border-color 0.2s ease;
+}
+
+.form-checkbox.is-checked {
+  border-color: #c2410c;
+}
+
+.form-checkbox input {
+  width: 18px;
+  height: 18px;
+  accent-color: #c2410c;
+  flex-shrink: 0;
+}
+
+.form-nav {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.form-nav.is-first {
+  grid-template-columns: 1fr;
+}
+
+.form-back {
+  border: 1px solid var(--border-strong);
+  color: #fff;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  transition: opacity 0.2s ease, transform 0.3s ease, border-color 0.2s ease;
+}
+
+.form-back:hover {
+  transform: scale(1.03);
+  border-color: #fff;
+}
+
+.form-next {
+  width: 100%;
+  background: #c2410c;
+  color: #fff;
+  font-weight: 700;
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  transition: opacity 0.2s ease, transform 0.3s ease;
+}
+
+.form-next:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
+.form-next:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.form-nav .is-hidden {
+  display: none;
 }
 
 /* ---------- Formspree success / error banners ---------- */
