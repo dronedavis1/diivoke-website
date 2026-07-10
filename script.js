@@ -10,6 +10,28 @@ window.formspree = window.formspree || function () {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+  /* ---------- Randomize order of items in [data-shuffle-grid] containers ---------- */
+  document.querySelectorAll("[data-shuffle-grid]").forEach((grid) => {
+    const items = Array.from(grid.children);
+    for (let i = items.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [items[i], items[j]] = [items[j], items[i]];
+    }
+    items.forEach((item) => grid.appendChild(item));
+  });
+
+  /* ---------- Click-to-enlarge media grid tiles ---------- */
+  document.querySelectorAll(".media-grid").forEach((grid) => {
+    const items = grid.querySelectorAll(".media-grid-item");
+    items.forEach((item) => {
+      item.addEventListener("click", () => {
+        const isActive = item.classList.contains("is-active");
+        items.forEach((i) => i.classList.remove("is-active"));
+        if (!isActive) item.classList.add("is-active");
+      });
+    });
+  });
+
   /* ---------- Mobile / full menu toggle ---------- */
   const menuBtn = document.querySelector("[data-menu-open]");
   const menuClose = document.querySelector("[data-menu-close]");
