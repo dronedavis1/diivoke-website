@@ -1385,6 +1385,10 @@ input, textarea {
   padding-bottom: 56px;
 }
 
+.case-hero > div {
+  text-align: center;
+}
+
 .case-back-link {
   display: inline-flex;
   align-items: center;
@@ -1420,11 +1424,14 @@ input, textarea {
   color: var(--text-dim);
   margin-top: 24px;
   max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
   line-height: 1.7;
 }
 
 .case-hero-meta {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 14px;
   margin-top: 32px;
@@ -1743,6 +1750,7 @@ input, textarea {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
+  margin-bottom: 28px;
 }
 
 @media (max-width: 900px) {
@@ -1767,10 +1775,10 @@ input, textarea {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.media-grid-item.is-active {
-  transform: scale(1.08);
-  z-index: 3;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+.media-grid-item:hover {
+  transform: scale(1.05);
+  z-index: 2;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
 }
 
 .media-grid-item img,
@@ -1779,6 +1787,114 @@ input, textarea {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* ---------- Media grid lightbox ---------- */
+.media-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: 40px;
+}
+
+.media-lightbox.open {
+  display: flex;
+}
+
+body.lightbox-open {
+  overflow: hidden;
+}
+
+.media-lightbox-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.media-lightbox-content img,
+.media-lightbox-content video {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  display: block;
+}
+
+.media-lightbox-close,
+.media-lightbox-arrow {
+  position: fixed;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.media-lightbox-close:hover,
+.media-lightbox-arrow:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.media-lightbox-close {
+  top: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+}
+
+.media-lightbox-arrow {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+}
+
+.media-lightbox-arrow:active {
+  transform: translateY(-50%) scale(0.9);
+}
+
+.media-lightbox-prev {
+  left: 24px;
+}
+
+.media-lightbox-next {
+  right: 24px;
+}
+
+@media (max-width: 640px) {
+  .media-lightbox {
+    padding: 16px;
+  }
+
+  .media-lightbox-arrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  .media-lightbox-prev {
+    left: 8px;
+  }
+
+  .media-lightbox-next {
+    right: 8px;
+  }
+
+  .media-lightbox-close {
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+  }
 }
 
 /* Work archive grid card variant (2-col) */

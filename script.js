@@ -20,15 +20,88 @@ document.addEventListener("DOMContentLoaded", () => {
     items.forEach((item) => grid.appendChild(item));
   });
 
-  /* ---------- Click-to-enlarge media grid tiles ---------- */
+  /* ---------- Media grid lightbox (click to enlarge, arrow-key/button navigation) ---------- */
   document.querySelectorAll(".media-grid").forEach((grid) => {
-    const items = grid.querySelectorAll(".media-grid-item");
-    items.forEach((item) => {
-      item.addEventListener("click", () => {
-        const isActive = item.classList.contains("is-active");
-        items.forEach((i) => i.classList.remove("is-active"));
-        if (!isActive) item.classList.add("is-active");
-      });
+    const items = Array.from(grid.querySelectorAll(".media-grid-item"));
+    if (!items.length) return;
+
+    const lightbox = document.createElement("div");
+    lightbox.className = "media-lightbox";
+    lightbox.innerHTML = `
+      <button type="button" class="media-lightbox-close" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <button type="button" class="media-lightbox-arrow media-lightbox-prev" aria-label="Previous">
+        <svg width="18" height="18" viewBox="0 0 12 12" fill="none"><path d="M8 2L3 6l5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="media-lightbox-content"></div>
+      <button type="button" class="media-lightbox-arrow media-lightbox-next" aria-label="Next">
+        <svg width="18" height="18" viewBox="0 0 12 12" fill="none"><path d="M4 2l5 4-5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    `;
+    document.body.appendChild(lightbox);
+
+    const content = lightbox.querySelector(".media-lightbox-content");
+    const closeBtn = lightbox.querySelector(".media-lightbox-close");
+    const prevBtn = lightbox.querySelector(".media-lightbox-prev");
+    const nextBtn = lightbox.querySelector(".media-lightbox-next");
+    let currentIndex = 0;
+
+    const renderItem = (index) => {
+      const item = items[index];
+      const sourceImg = item.querySelector("img");
+      const sourceVideo = item.querySelector("video");
+      content.innerHTML = "";
+      if (sourceImg) {
+        const img = document.createElement("img");
+        img.src = sourceImg.currentSrc || sourceImg.src;
+        img.alt = sourceImg.alt;
+        content.appendChild(img);
+      } else if (sourceVideo) {
+        const video = document.createElement("video");
+        const source = sourceVideo.querySelector("source");
+        video.src = source ? source.src : sourceVideo.currentSrc;
+        video.muted = true;
+        video.loop = true;
+        video.autoplay = true;
+        video.playsInline = true;
+        video.controls = true;
+        content.appendChild(video);
+      }
+    };
+
+    const open = (index) => {
+      currentIndex = (index + items.length) % items.length;
+      renderItem(currentIndex);
+      lightbox.classList.add("open");
+      document.body.classList.add("lightbox-open");
+    };
+
+    const close = () => {
+      lightbox.classList.remove("open");
+      document.body.classList.remove("lightbox-open");
+      content.innerHTML = "";
+    };
+
+    const showNext = () => open(currentIndex + 1);
+    const showPrev = () => open(currentIndex - 1);
+
+    items.forEach((item, index) => {
+      item.addEventListener("click", () => open(index));
+    });
+
+    closeBtn.addEventListener("click", close);
+    nextBtn.addEventListener("click", showNext);
+    prevBtn.addEventListener("click", showPrev);
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) close();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (!lightbox.classList.contains("open")) return;
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowRight") showNext();
+      if (e.key === "ArrowLeft") showPrev();
     });
   });
 
