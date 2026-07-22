@@ -1977,8 +1977,8 @@ body.lightbox-open {
 }
 
 .review-card-quote p {
-  font-size: 15px;
-  line-height: 1.75;
+  font-size: 20px;
+  line-height: 1.6;
   color: var(--text-dim);
   font-style: italic;
   margin: 0;
@@ -2001,5 +2001,9 @@ body.lightbox-open {
 
   .review-card-photo {
     max-width: 200px;
+  }
+
+  .review-card-quote p {
+    font-size: 17px;
   }
 }
