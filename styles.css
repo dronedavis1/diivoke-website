@@ -1426,6 +1426,18 @@ input, textarea {
   letter-spacing: -0.02em;
 }
 
+.case-hero-logo {
+  display: block;
+  max-width: 220px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto 24px;
+  padding: 20px 24px;
+  background: #f2f0eb;
+  border-radius: var(--radius-md);
+  box-sizing: border-box;
+}
+
 .case-hero-desc {
   color: var(--text-dim);
   margin-top: 24px;
