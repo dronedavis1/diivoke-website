@@ -2025,3 +2025,13 @@ body.lightbox-open {
     font-size: 17px;
   }
 }
+
+/* ============ TEMP: Contact + Reviews disabled (delete this block to restore) ============ */
+.menu-links a[href$="reviews.html"],
+.menu-links a[href$="#contact"],
+#contact,
+.pre-contact-cta,
+.hero-cta-wrap,
+.case-cta {
+  display: none !important;
+}
